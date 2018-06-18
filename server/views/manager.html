@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>后台管理</title>
+		<script type="text/javascript" src="/javascripts/jquery-3.1.1.js"></script>
+		<link href='/stylesheets/style.css' type="text/css" rel="stylesheet">
+		<link href='/stylesheets/bootstrap.min.css' type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/javascripts/manager.js"></script>
+	</head>
+	<body>
+		<div class="login">
+			<section class="stark-login">
+				<div id="fade-box">
+					<form>
+						<div>管理员登录</div>
+						<input type="text" name="adminName" id="adminName" placeholder="请输入管理员账号">
+						<input type="password" id="password" placeholder="请输入管理员密码">
+						<button class="adminLogin" type="button">Login</button>
+					</form>
+				</div>
+			</section>
+		</div>
+		<div class="fadeModals"></div>
+		<div class="container tabbable">
+			<ul class="nav nav-tabs manager-tab">
+				<li role="presentation" class="active"><a href="#1" data-toggle="tab">用户管理</a></li>
+				<li role="presentation"><a href="#2" data-toggle="tab">菜品管理</a></li>
+				<li role="presentation"><a href="#3" data-toggle="tab">评论管理</a></li>
+				<li role="presentation"><a href="#4" data-toggle="tab">订单管理</a></li>
+			</ul>
+			<!-- <div><%=title%></div> -->
+			<div class="tab-content">
+				<div class="m-seller">
+					<table class="table table-striped tab">
+						<thead>
+							<tr>	
+								<th>账号</th>
+								<th>密码</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+					<div class="tab tab-2">
+						<div class="form-group">
+							<input type="text" id="inputSeller" placeholder="请输入商家ID">
+							<button class="btn btn-default searchSeller">搜索</button>
+						</div>
+						<div class="goods">
+						</div>
+						<div class="editGoods">
+							<div class="addmodel-close">×</div>
+							<div class="addmodel-title">修改菜品</div>
+							<div class="addmodel-content">
+								<div class="addmodel-form">
+									<div>
+										<div class="addmodel-field">
+											<label>ID</label>
+											<input placeholder="请输入ID" id="goodsType" />
+										</div>
+										<div class="addmodel-field">
+											<label>菜名</label>
+											<input placeholder="请输入菜名" id="goodsName"/>
+											<span class="fieldTip">请输入菜名</span>
+										</div>
+										<div class="addmodel-field">
+											<label>价格</label>
+											<input placeholder="请输入价格" id="goodsPrice"/>
+											<span class="fieldTip">请输入价格</span>
+										</div>
+										<div class="addmodel-field">
+											<label>图片地址</label>
+											<input placeholder="请输入图片地址" id="goodsImg"/>
+											<span class="fieldTip">请输入图片地址</span>
+										</div>
+									</div>
+									<div class="addmodel-submit">
+										<button>保存</button>
+										<button>取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="fadeModal"></div>
+					</div>
+					<div class="tab tab-3">
+						<div class="form-group">
+							<input type="text" id="inputRating3" placeholder="请输入商家ID">
+							<button class="btn btn-default searchRating">搜索</button>
+						</div>
+						<div class="tab3-content">
+							
+						</div>
+					</div>
+					<div class="tab tab-4">
+						<div class="form-group">
+							<input type="text" id="inputSeller4" placeholder="请输入商家ID">
+							<button class="btn btn-default searchSeller">搜索</button>
+						</div>
+						<div class="tab4-content">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

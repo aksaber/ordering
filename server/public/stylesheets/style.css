@@ -1,0 +1,343 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 50px 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.fadeModals{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    z-index: 39;
+}
+
+.login{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 40;
+}
+
+.login-close{
+  position: absolute;
+  right: 15px;
+  font-size: 24px;
+  top: 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-close:hover{
+  transform: scale(1.2,1.2);
+}
+
+#fade-box, .login-close {
+  animation: input-entry 1s ease-in;
+  z-index: 4;
+}
+
+#fade-box, .signUp {
+  animation: input-entry 1s ease-in;
+  z-index: 4;
+}
+
+.stark-login{
+  text-align: center;
+}
+
+.stark-login form {
+  animation: form-entry 1s ease-in-out;
+  background: linear-gradient(#F5F5F5, #bdc0ec);
+  border-radius: 5px;
+  display: inline-block;
+  height: 250px;
+  margin: 150px auto 0;
+  padding-top: 17px;
+  position: relative;
+  z-index: 4;
+  width: 500px;
+  transition: 1s all;
+}
+
+.stark-login input {
+  background: linear-gradient(#ffffff, #f7f7f7);
+  border: 1px solid #f3f3f3;
+  border-radius: 5px;
+  color: #888;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-size: 1.3rem;
+  height: 40px;
+  margin: 20px auto 10px;
+  padding: 0 10px;
+  width: 400px;
+}
+.stark-login input:focus {
+  animation: box-glow 1s ease-out infinite alternate;
+  color: #000;
+  outline: none;
+}
+.stark-login input:invalid {
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1), 0 2px 0 black;
+}
+.stark-login button {
+  animation: input-entry 1s ease-in;
+  background: linear-gradient(#ffffff, #b7afe4);
+  box-sizing: content-box;
+  border: 1px solid #cecdcd;
+  border-radius: 5px;
+  color: #4c4c4c;
+  display: block;
+  font-family: 'Cabin', helvetica, arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  margin: 20px auto;
+  padding: 0;
+  position: relative;
+  width: 400px;
+  transition: 1s all;
+}
+.stark-login button:hover,
+.stark-login button:focus {
+  background: linear-gradient(#fff, #c2baf1);
+  color: #000;
+  outline: none;
+  transition: .3s all;
+}
+.stark-login button:active {
+  background: linear-gradient(#fff, #c2baf1);
+  top: 1px;
+}
+
+@keyframes input-entry {
+  0% {
+    opacity: 0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes form-entry {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    padding: 0;
+  }
+
+  20% {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    padding: 0;
+  }
+
+  40% {
+    width: 0;
+    height: 220px;
+    opacity: 1;
+    padding: 0;
+  }
+
+  100% {
+    height: 220px;
+    width: 500px;
+  }
+}
+
+.pullUsers{
+	font-size: 12px!important;
+
+}
+
+.tab{
+	display: none;
+	padding:10px;
+}
+
+.active{
+	display: table!important;
+}
+
+.form-group{
+	float: right;
+}
+
+.goods{
+	clear: both;
+    padding: 10px;
+}
+
+#inputSeller,#inputRating3,#inputSeller4{
+	display: inline-block;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.fadeModal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    filter: blur(5px);
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 1;
+    z-index: 39;
+}
+
+.editGoods{
+    display: none;
+    position: fixed;
+    top: 67.5px;
+    left: 288px;
+    z-index: 50;
+    background: #fff;
+}
+
+.editGoods label{
+    float: left;
+    display: inline-block;
+    width: 65px;
+    height: 38px;
+    margin-right: 20px;
+    line-height: 38px;
+    text-align: right;
+    color: #666;
+    font-weight: normal;
+}
+
+.editGoods input{
+    vertical-align: baseline;
+    border: 1px solid #dedede;
+    box-sizing: border-box;
+    width: 300px;
+    height: 42px;
+    line-height: 38px;
+    padding-left: 10px;
+    border-radius: 2px;
+}
+
+.editGoods span{
+    position: absolute;
+    bottom: 3px;
+    left: 95px;
+    color: red;
+}
+
+.addmodel-close{
+    display: inline-block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 24px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.addmodel-title{
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px;
+    color: #333;
+    border-bottom: 1px solid #efe8e8;
+}
+
+.addmodel-content{
+    padding: 15px 15px 30px;
+    overflow: hidden;
+}
+
+.addmodel-form{
+    width: 760px;
+    position: relative;
+}
+
+.addmodel-field{
+    position: relative;
+    padding-bottom: 25px;
+    font-size: 14px;
+}
+
+.addmodel-submit{
+    margin-left: 84px;
+    margin-top: 30px;
+}
+
+.addmodel-submit button:first-child{
+    margin-right: 10px;
+    border: 1px solid #0089dc;
+    background-color: #0089dc;
+    color: #fff;
+    width: 160px;
+}
+
+.addmodel-submit button{
+    font-size: 14px;
+    box-sizing: border-box;
+    background: 0 0;
+    border: none;
+    padding: 0 20px;
+    color: #9f9f9f;
+    height: 42px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.fieldTip{
+    display: none;
+}
+
+.tab4-content{
+    clear: both;
+    padding: 10px;
+}
+
+.goodName{
+    position: relative;
+}
+
+.addGoods{
+    font-size: 31px;
+    right: 0;
+    top: -3px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.form-group{
+    margin-bottom: 0px!important;
+}
