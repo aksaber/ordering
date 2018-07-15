@@ -1,11 +1,77 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 50px 0;
+/*  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif!important;
 }
 
 a {
   color: #00B7FF;
 }
+
+::-webkit-scrollbar    
+{    
+    width: 13px;    
+    height: 13px;    
+    background-color: #F5F5F5;    
+}    
+    
+/*定义滚动条轨道 内阴影+圆角*/    
+::-webkit-scrollbar-track    
+{    
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);    
+    border-radius: 10px;    
+    background-color: rgba(255, 255, 255, 0.78);    
+}    
+
+/*定义滑块 内阴影+圆角*/    
+::-webkit-scrollbar-thumb    
+{    
+    border-radius: 10px;    
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);    
+    background-color: #70829840;    
+}    
+  
+  .el-aside {
+    color: #333;
+  }
+
+  .el-main{
+    padding-top: 0!important;
+  }
+
+  .el-input__inner{
+    height: 36px!important;
+    line-height: 36px!important;
+  }
+
+  label{
+    font-weight: 500!important;
+  }
+
+  .mainHeader{
+    background: #f2f2f2;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+
+.banner{
+  background: #5c7ca2b0;
+  width: 100%;
+  color: #fff;
+  height: 60px;
+  line-height: 60px;
+  font-size: 22px;
+  padding-left: 25px;
+}
+
+.cfooter{
+    background: #5c7ca2b0;
+    height: 60px;
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+
 
 .fadeModals{
     position: fixed;

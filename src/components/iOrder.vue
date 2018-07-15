@@ -95,9 +95,9 @@
 					}).then((res) => {
 						alert("评价成功！");
 						$("#collapseExample").hide();
+						self.orderShow = -1;
 						self.$http.get('/api/users/finalEvaluate').then((res) => {
 							if(res.result == 'over'){
-								debugger;
 								self.$emit("togglefun", 1);
 							}
 						});

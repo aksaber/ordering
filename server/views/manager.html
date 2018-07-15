@@ -4,107 +4,558 @@
 		<meta charset="utf-8">
 		<title>后台管理</title>
 		<script type="text/javascript" src="/javascripts/jquery-3.1.1.js"></script>
-		<link href='/stylesheets/style.css' type="text/css" rel="stylesheet">
-		<link href='/stylesheets/bootstrap.min.css' type="text/css" rel="stylesheet">
 		<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
-		<script type="text/javascript" src="/javascripts/manager.js"></script>
+		<script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.js"></script>
+		<script src="https://cdn.bootcss.com/vue-router/3.0.1/vue-router.js"></script>
+		<script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<link rel="stylesheet" href='/stylesheets/style.css'>
+		<link rel="stylesheet" href='/stylesheets/bootstrap.min.css'>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	</head>
 	<body>
-		<div class="login">
-			<section class="stark-login">
-				<div id="fade-box">
-					<form>
-						<div>管理员登录</div>
-						<input type="text" name="adminName" id="adminName" placeholder="请输入管理员账号">
-						<input type="password" id="password" placeholder="请输入管理员密码">
-						<button class="adminLogin" type="button">Login</button>
-					</form>
-				</div>
-			</section>
-		</div>
-		<div class="fadeModals"></div>
-		<div class="container tabbable">
-			<ul class="nav nav-tabs manager-tab">
-				<li role="presentation" class="active"><a href="#1" data-toggle="tab">用户管理</a></li>
-				<li role="presentation"><a href="#2" data-toggle="tab">菜品管理</a></li>
-				<li role="presentation"><a href="#3" data-toggle="tab">评论管理</a></li>
-				<li role="presentation"><a href="#4" data-toggle="tab">订单管理</a></li>
-			</ul>
-			<!-- <div><%=title%></div> -->
-			<div class="tab-content">
-				<div class="m-seller">
-					<table class="table table-striped tab">
-						<thead>
-							<tr>	
-								<th>账号</th>
-								<th>密码</th>
-								<th>操作</th>
-							</tr>
-						</thead>
-						<tbody></tbody>
-					</table>
-					<div class="tab tab-2">
-						<div class="form-group">
-							<input type="text" id="inputSeller" placeholder="请输入商家ID">
-							<button class="btn btn-default searchSeller">搜索</button>
-						</div>
-						<div class="goods">
-						</div>
-						<div class="editGoods">
-							<div class="addmodel-close">×</div>
-							<div class="addmodel-title">修改菜品</div>
-							<div class="addmodel-content">
-								<div class="addmodel-form">
-									<div>
-										<div class="addmodel-field">
-											<label>ID</label>
-											<input placeholder="请输入ID" id="goodsType" />
-										</div>
-										<div class="addmodel-field">
-											<label>菜名</label>
-											<input placeholder="请输入菜名" id="goodsName"/>
-											<span class="fieldTip">请输入菜名</span>
-										</div>
-										<div class="addmodel-field">
-											<label>价格</label>
-											<input placeholder="请输入价格" id="goodsPrice"/>
-											<span class="fieldTip">请输入价格</span>
-										</div>
-										<div class="addmodel-field">
-											<label>图片地址</label>
-											<input placeholder="请输入图片地址" id="goodsImg"/>
-											<span class="fieldTip">请输入图片地址</span>
-										</div>
-									</div>
-									<div class="addmodel-submit">
-										<button>保存</button>
-										<button>取消</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="fadeModal"></div>
+		<div id="apps">
+			<div class="login" v-show="showModal">
+				<section class="stark-login">
+					<div id="fade-box">
+						<form>
+							<div>管理员登录</div>
+							<input type="text" name="adminName" id="adminName" placeholder="请输入管理员账号">
+							<input type="password" id="password" placeholder="请输入管理员密码">
+							<button class="adminLogin" type="button">Login</button>
+						</form>
 					</div>
-					<div class="tab tab-3">
-						<div class="form-group">
-							<input type="text" id="inputRating3" placeholder="请输入商家ID">
-							<button class="btn btn-default searchRating">搜索</button>
-						</div>
-						<div class="tab3-content">
-							
-						</div>
-					</div>
-					<div class="tab tab-4">
-						<div class="form-group">
-							<input type="text" id="inputSeller4" placeholder="请输入商家ID">
-							<button class="btn btn-default searchSeller">搜索</button>
-						</div>
-						<div class="tab4-content">
-							
-						</div>
-					</div>
-				</div>
+				</section>
 			</div>
+			<div class="fadeModals" v-show="showModal"></div>
+
+			<div class="banner">后台管理系统</div>
+			<el-container style="height: 500px; border: 1px solid #eee">
+			  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+			    <el-menu :default-openeds="['1', '2']" default-active="1-1">
+			      <el-submenu index="1">
+			        <template slot="title"><i class="el-icon-goods"></i>后台管理</template>
+			        <el-menu-item-group>
+			          <el-menu-item index="1-1" @click="toggleManage(1)">用户管理</el-menu-item>
+			          <el-menu-item index="1-2" @click="toggleManage(2)">菜品管理</el-menu-item>
+			          <el-menu-item index="1-3" @click="toggleManage(3)">评论管理</el-menu-item>
+			          <el-menu-item index="1-4" @click="toggleManage(4)">订单管理</el-menu-item>
+			        </el-menu-item-group>
+			      </el-submenu>
+			    </el-menu>
+			  </el-aside>
+			  
+			  <el-container>
+			    <!--用户管理-->
+			    <el-main v-show="toggleIndex == 1">
+			      <div style="margin: 15px;">用户管理</div>
+			      <el-table :data="userData" border>
+			        <el-table-column label="账号">
+			            <template slot-scope="scope">
+			            	<el-tag type="info">{{scope.row.userName}}</el-tag>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="密码">
+			            <template slot-scope="scope">
+			            	<el-popover trigger="hover" placement="left">
+			            	    <p>{{scope.row.userPwd}}</p>
+			            	    <div slot="reference" class="name-wrapper">
+						            <el-tag type="info">********</el-tag>
+						        </div>
+			                </el-popover>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="操作">
+				        <template slot-scope="scope">
+				        	<el-button type="danger" size="small" @click="delUser(scope.row.userName)">删除</el-button>
+				        </template>
+			        </el-table-column>
+			      </el-table>
+			    </el-main>
+			    <!--菜品管理-->
+			    <el-main v-show="toggleIndex == 2">
+			      <div style="margin: 15px;">菜品管理</div>
+			      <div class="mainHeader">
+			      	<el-input 
+				      v-model="idInput" 
+				      placeholder="请输入商家ID" 
+				      suffix-icon="el-icon-search" 
+				      style="width: 30%;"
+				      @keyup.enter.native="searchInput()">
+				    </el-input>
+				    <el-button
+				      round
+				      type="success"
+				      plain
+				      style="float: right;"
+				      @click="foodsFun(3)"
+				      :disabled="!idInput">添加菜品</el-button>
+			      </div>
+			      <el-table :data="foodsData" border>
+			        <el-table-column prop="description" label="类别" width="100">
+			        </el-table-column>
+			        <el-table-column prop="name" label="菜名" width="250">
+			        </el-table-column>
+			        <el-table-column label="价格" width="100">
+			            <template slot-scope="scope">
+			            	<el-tag type="danger">{{scope.row.price}}</el-tag>
+			            </template>
+			        </el-table-column>
+			        <el-table-column prop="image" label="图片链接">
+			        </el-table-column>
+			        <el-table-column label="操作">
+				        <template slot-scope="scope">
+				        	<el-button type="warning" size="small" @click="foodsFun(1, scope.row)">修改</el-button>
+				        	<el-button type="danger" size="small" @click="foodsFun(2, scope.row)">删除</el-button>
+				        </template>
+			        </el-table-column>
+			      </el-table>
+			    </el-main>
+			    <!--修改/添加菜品框-->
+			    <el-dialog :title="editField.title" :visible.sync="editForm">
+					<el-form :model="editformData">
+						<el-form-item label="ID" label-width="80px">
+						  <el-input v-model="editformData.id" auto-complete="off"></el-input>
+						</el-form-item>
+					</el-form>
+					<el-form :model="editformData">
+						<el-form-item label="菜名" label-width="80px">
+						  <el-input v-model="editformData.name" auto-complete="off"></el-input>
+						</el-form-item>
+					</el-form>
+					<el-form :model="editformData">
+						<el-form-item label="价格" label-width="80px" :rules="priceRules">
+						  <el-input v-model="editformData.price" auto-complete="off"></el-input>
+						</el-form-item>
+					</el-form>
+					<el-form :model="editformData">
+						<el-form-item label="图片链接" label-width="80px">
+						  <el-input v-model="editformData.image" auto-complete="off"></el-input>
+						</el-form-item>
+					</el-form>
+					<div slot="footer" class="dialog-footer">
+						<el-button @click="editForm = false">取 消</el-button>
+						<el-button type="primary" @click="editFoods()">{{editField.submit}}</el-button>
+					</div>
+				</el-dialog>
+				<!--评论管理-->
+				<el-main v-show="toggleIndex == 3">
+				  <div style="margin: 15px;">评论管理</div>
+				  <div class="mainHeader">
+			      	<el-input 
+				      v-model="idInput" 
+				      placeholder="请输入商家ID" 
+				      suffix-icon="el-icon-search" 
+				      style="width: 30%;"
+				      @keyup.enter.native="searchInput()">
+				    </el-input>
+			      </div>
+			      <el-table :data="evaData" border>
+			        <el-table-column prop="username" label="用户">
+			        </el-table-column>
+			        <el-table-column label="评论时间">
+			            <template slot-scope="scope">
+			            	<i class="el-icon-time"></i>
+			            	<span style="margin-left: 10px">{{scope.row.rateTime}}</span>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="送达时间">
+			            <template slot-scope="scope">
+			            	<span v-if="scope.row.deliveryTime">{{scope.row.deliveryTime}}分钟</span>
+			            </template>
+			        </el-table-column>
+			        <el-table-column prop="text" label="评论内容">
+			        </el-table-column>
+			      </el-table>
+			    </el-main>
+			    <!--订单管理-->
+			    <el-main v-show="toggleIndex == 4">
+			      <div style="margin: 15px;">订单管理</div>
+				  <div class="mainHeader">
+			      	<el-input 
+				      v-model="idInput" 
+				      placeholder="请输入商家ID" 
+				      suffix-icon="el-icon-search" 
+				      style="width: 30%;"
+				      @keyup.enter.native="searchInput()">
+				    </el-input>
+			      </div>
+			      <el-table :data="orderData" border>
+			        <el-table-column label="创建时间" width="200">
+			            <template slot-scope="scope">
+			            	<i class="el-icon-time"></i>
+			            	<span style="margin-left: 10px">{{scope.row.createTime}}</span>
+			            </template>
+			        </el-table-column>
+			        <el-table-column prop="remark" show-overflow-tooltip label="备注">
+			        </el-table-column>
+			        <el-table-column label="菜名">
+			            <template slot-scope="scope">
+			            	<el-popover trigger="hover" placement="left">
+			            	    <p>菜品及数量：{{scope.row.goodsInfo}}</p>
+			            	    <div slot="reference" class="name-wrapper">
+						            <el-tag size="medium">详细信息</el-tag>
+						        </div>
+			                </el-popover>
+			            </template>
+			        </el-table-column>
+			        <el-table-column show-overflow-tooltip label="地址">
+			            <template slot-scope="scope">
+			            	<el-popover trigger="hover" placement="top">
+			            	    <p>地址：{{scope.row.addressInfo}}</p>
+			            	    <p>收货人：{{scope.row.addressName}}</p>
+			            	    <p>电话：{{scope.row.addressTel}}</p>
+			            	    <div slot="reference" class="name-wrapper">
+						            <el-tag size="medium" type="success">详细信息</el-tag>
+						        </div>
+			                </el-popover>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="金额">
+			            <template slot-scope="scope">
+			            	<el-tag type="danger">{{scope.row.totalPrice}}</el-tag>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="订单状态">
+			            <template slot-scope="scope">
+			            	<el-tag>{{scope.row.statusInfo}}</el-tag>
+			            </template>
+			        </el-table-column>
+			        <el-table-column label="操作">
+				        <template slot-scope="scope">
+				        	<el-button size="small" @click="orderTaking()" :disabled="scope.row.status == '1'">接单</el-button>
+				        </template>
+			        </el-table-column>
+			      </el-table>
+			    </el-main>
+
+			  </el-container>
+			</el-container>
+			<div class="cfooter"></div>
 		</div>
+
 	</body>
+	<script>
+		new Vue({
+		  el: '#apps',
+		  data() {
+		      // const item = {
+			  //   date: '2016-05-02',
+			  //   name: '王小虎'
+			  // };
+			  return {
+			  	editformData: {   //修改菜品
+		          id: '',
+		          name: '',
+		          price: '',
+		          image: ''
+		        },
+		        priceRules: [{
+		        	required: true,
+		        	type: 'number', 
+		        	message: '价格必须为数字',
+		        }],
+		        editField: {
+		        	title: '',
+		        	submit: ''
+		        },
+			    userData: [],  //用户信息
+			    foodsData: [],  //菜品信息
+			    evaData: [],  //评论信息
+			    orderData: [],  //订单信息
+			    cookieAdmin: "",  //cookie
+			    showModal: false,  //显示登录框和遮罩层
+			    editForm: false,
+			    toggleIndex: 1,  //显示哪个管理
+			    idInput: "",  //输入框的值
+			    rules: {}
+			  }
+		  },
+
+		  mounted() {
+			var cookieArr = document.cookie.split(";");
+		    for(var i = 0; i < cookieArr.length; i++){
+		        var arr = cookieArr[i].trim().split("=");
+		        if(arr[0] == 'admin'){
+		            this.cookieAdmin = arr[1];
+		            break;
+		        }
+		    }
+		    //管理员登录
+		    if(this.cookieAdmin != 'admin'){
+				$(".container").hide();
+				this.showModal = true;
+				$(".adminLogin").click(function() {
+					var a = $("#adminName").val();
+					var b = $("#password").val()
+					$.ajax({
+						url: '/admin',
+						type: 'post',
+						async: false,
+						data: {
+							'adminName': $("#adminName").val(),
+							'adminpwd': $("#password").val()
+						},
+						success: function(res) {
+							if(res.result == '成功登录'){
+								location.reload();
+							}
+						}
+					});
+				});
+			}else{
+				this.showModal = false;
+				$(".fadeModal").hide();
+			}
+			//用户管理
+			this.userAdminFun();
+		  },
+
+		  methods: {
+		  	toggleManage(index) {
+		  		this.toggleIndex = index;
+		  	},
+		  	userAdminFun() {  //用户管理
+		  		var self = this;
+		  		$.ajax({
+					url: '/users/userAdmin',
+					type: 'get',
+					success: function(res) {
+						var table = "";
+						for(var i = 0; i < res.result.length; i++){
+							self.userData.push(res.result[i]);
+						}
+					}
+				});
+		  	},
+		  	delUser(userName) {
+		  		var self = this;
+				this.$confirm('你确定要删除此用户吗？', '提示', {
+		            confirmButtonText: '确定',
+		            cancelButtonText: '取消',
+		            type: 'warning'
+		        }).then(() => {
+		        	$.ajax({
+						url: '/users/delUserAdmin',
+						type: 'post',
+						data: {
+							"userName": userName
+						},
+						success: function(res) {
+							self.$message({
+				                type: 'success',
+				                message: '删除成功!'
+				            });
+							self.userData = [];
+							self.userAdminFun();
+						}
+					});
+		        }).catch(() => {
+		            this.$message({
+		                type: 'info',
+		                message: '已取消删除'
+		            });          
+		        });
+		  	},
+		  	//搜索框
+		  	searchInput() {
+		  		if(this.toggleIndex == 2){
+		  			this.findGoods();
+		  			return;
+		  		}else if(this.toggleIndex == 3){
+		  			this.showEvaluate();
+		  			return;
+		  		}else if(this.toggleIndex == 4){
+		  			this.showOrder();
+		  			return;
+		  		}
+		  	},
+		  	findGoods() {   //菜品管理
+		  		var self = this;
+		  		$.ajax({
+					url: '/afood',
+					type: 'post',
+					async: 'false',
+					data: {
+						"foodId": self.idInput
+					},
+					success: function(res) {
+						self.foodsData = [];
+						var food = res.result[0].foods;
+						for(var i = 0; i < food.length; i++){
+							for(var j = 0; j < food[i].foods.length; j++){
+								self.foodsData.push(food[i].foods[j]);
+							}
+						}
+					}
+				});
+		  	},
+		  	foodsFun(type, data) {
+		  		var self = this;
+		  		if(type == 1){  //菜品管理 - 修改
+		  			this.editField = {
+		  				title: '修改菜品',
+		  				submit: '修 改'
+		  			};
+		  			this.editForm = true;
+			  		this.editformData.id = data.type;
+			  		this.editformData.name = data.name;
+			  		this.editformData.price = data.price;
+			  		this.editformData.image = data.image;
+		  		}else if(type == 2){  //菜品管理 - 删除
+		  			this.$confirm('你确定要删除此菜品吗？', '提示', {
+			            confirmButtonText: '确定',
+			            cancelButtonText: '取消',
+			            type: 'warning'
+			        }).then(() => {
+			        	$.ajax({
+				    		url: '/afood/delGoods',
+				    		type: 'post',
+				    		data: {
+				    			"goodsId": self.idInput,
+				    			"goodsType": data.type
+				    		},
+				    		success: function(res) {
+				    			if(res.result == '666'){
+				    				self.$message({
+						                type: 'success',
+						                message: '删除成功!'
+						            });
+				    				self.findGoods(self.idInput);
+				    			}
+				    		}
+				    	});
+			        }).catch(() => {
+			            this.$message({
+			                type: 'info',
+			                message: '已取消删除'
+			            });          
+			        });
+		  		}else if(type == 3){  //菜品管理 - 添加
+		  			this.editForm = true;
+		  			this.editField = {
+		  				title: '添加菜品',
+		  				submit: '添 加'
+		  			};
+		  		}
+		  	},
+		  	editFoods() {  // 添加/修改菜品
+		  		var self = this;
+		  		if(self.editField.title == '修改菜品'){
+			  		$.ajax({
+			    		url: '/afood/editGoods',
+			    		type: 'post',
+			    		data: {
+			    			"goodsId": self.idInput,
+			    			"goodsType": self.editformData.id,
+			    			"goodsName": self.editformData.name,
+			    			"goodsPrice": self.editformData.price,
+			    			"goodsImg": self.editformData.image
+			    		},
+			    		success: function(res) {
+			    			if(res.result == '666'){
+			    				self.$message('菜品修改成功');
+			    				self.editForm = false;
+			    				self.findGoods(self.idInput);
+			    			}else{
+			    				self.$message("请输入正确的价格");
+			    			}
+			    		}
+			    	});
+			  	}else if(self.editField.title == '添加菜品'){
+			  		$.ajax({
+						url: '/afood/addGoods',
+						type: 'post',
+						data: {
+							"goodsId": self.idInput,
+							"goodsType": self.editformData.id,
+							"goodsName": self.editformData.name,
+							"goodsPrice": self.editformData.price,
+							"goodsImg": self.editformData.image
+						},
+						success: function(res) {
+							if(res.result == '666'){
+			    				self.$message('菜品添加成功');
+			    				self.editForm = false;
+			    				self.findGoods(self.idInput);
+			    			}
+						}
+					});
+			  	}
+		  	},
+		  	showEvaluate() {  //评论管理
+		  		var self = this;
+		  		$.ajax({
+		    		url: "/aratings",
+		    		type: "post",
+		    		data: {
+		    			"ratingsId": self.idInput
+		    		},
+		    		success: function(res) {
+		    			self.evaData = [];
+		    			for(var i = 0; i < res.result[0].ratings.length; i++) {
+		    				self.evaData.push(res.result[0].ratings[i]);
+		    			}
+		    		}
+		    	});
+		  	},
+		  	showOrder() {  //订单管理
+		  		var self = this;
+		  		$.ajax({
+		    		url: "/orders/findOrder",
+		    		type: "post",
+		    		data: {
+		    			"sellerId": self.idInput
+		    		},
+		    		success: function(res) {
+		    			self.orderData = [];
+		    			var orders = res.result[0].orders;
+		    			for(var i = 0; i < orders.length; i++) {
+		    				self.orderData.push(orders[i]);
+		    				if(self.orderData[i].status == "0"){
+		    					self.orderData[i].statusInfo = "未接单";
+		    				}else if(self.orderData[i].status == "1"){
+		    					self.orderData[i].statusInfo = "已接单";
+		    				}else if(self.orderData[i].status == "2"){
+		    					self.orderData[i].statusInfo = "已完成";
+		    				}
+		    				self.orderData[i].goodsInfo = [];
+		    				for(var j = 0; j < orders[i].goods.length; j++){
+		    					self.orderData[i].goodsInfo.push(orders[i].goods[j].name + ", " + orders[i].goods[j].count);
+		    				}
+		    				self.orderData[i].addressInfo = self.orderData[i].address[0].address;
+		    				self.orderData[i].addressName = self.orderData[i].address[0].name;
+		    				self.orderData[i].addressTel = self.orderData[i].address[0].tel;
+		    			}
+		    		}
+		    	});
+		  	},
+		  	orderTaking() {  //订单管理 - 接单
+		  		var self = this;
+		  		$.ajax({
+					url: '/orders/takeOrder',
+					type: 'post',
+					data: {
+						'sellerId': self.idInput
+					},
+					success: function(res) {
+						if(res.result == '已接单'){
+							$.ajax({
+								url: '/users/takeOrder',
+								type: 'post',
+								data: {},
+								success: function(res) {
+									if(res.result == '已接单'){
+										self.$message('已接单');
+		    							self.showOrder();
+									}
+								}
+							});
+						}
+					}
+				});
+		  	}
+		  }
+		})
+	</script>
 </html>
